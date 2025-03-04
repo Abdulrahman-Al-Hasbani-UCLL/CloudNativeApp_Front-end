@@ -71,7 +71,7 @@ export default function Thread({ forumUser, threadData, threadPosts, recentThrea
 
     return (
         <>
-            <Meta title={`${thread?.title} - Demo Foru.ms`} />
+            <Meta title={`${thread?.title} - Forum Y`} />
   <div className="flex flex-no-wrap">
             <Sidebar data={forumUser} />
     <div className="w-full">

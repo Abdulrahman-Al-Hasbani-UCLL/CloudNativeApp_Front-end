@@ -17,7 +17,7 @@ const Support = ({ forumUser, threads, posts, currentPage, nextThreadCursor }) =
     
     return (
         <>
-            <Meta title="Demo Foru.ms" />
+            <Meta title="Forum Y" />
             <div className="flex flex-no-wrap">
                 <Sidebar data={forumUser} />
                 <div className="w-full">
