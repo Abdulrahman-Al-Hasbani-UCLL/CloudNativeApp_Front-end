@@ -106,7 +106,7 @@ const Login = ({ forumUser }) => {
                 <div className="flex flex-col lg:w-full items-center justify-center mx-auto md:h-screen lg:py-0">
                     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                            <h3 className="mb-5 text-gray-900 font-medium text-xl">Login</h3>
+                            <h3 className="mb-5 text-white-900 font-medium text-xl dark:text-white">Login</h3>
                             <form className="space-y-4 md:space-y-6" action="POST" onSubmit={handleLogin}>
                                 <div>
                                     <label htmlFor="username-email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -136,7 +136,7 @@ const Login = ({ forumUser }) => {
                                 </div>
                                 <button
                                     type="submit"
-                                    className="bg-gray-800 text-sm  text-white rounded hover:bg-gray-600 transition duration-150 ease-in-out py-2 px-6"
+                                    className="bg-blue-700 text-sm  text-white rounded hover:bg-blue-600 transition duration-150 ease-in-out py-2 px-6"
                                     disabled={submittingState}
                                 >
                                     Login
@@ -148,7 +148,7 @@ const Login = ({ forumUser }) => {
                 <div className="flex flex-col lg:w-full items-center justify-center mx-auto md:h-screen lg:py-0">
     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-        <h3 className="mb-5 text-gray-900 font-medium text-xl">
+        <h3 className="mb-5 text-white-900 font-medium text-xl dark:text-white">
           Create an account
         </h3>
         <form className="space-y-4 md:space-y-6" action="POST" onSubmit={handleRegister}>
