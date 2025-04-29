@@ -107,11 +107,11 @@ const Sidebar = ({ data }) => {
                             Home
                         </Link>
                     </li>
-                    <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-6 py-2 hover:text-blue-700 focus:text-blue-700 focus:outline-none flex items-center">
+                    <li className="cursor-pointer text-gray-600 text-sm tracking-normal mt-2 py-2 hover:text-blue-700 focus:text-blue-700 focus:outline-none flex items-center">
                         {data?.id ? (
                             <Link href="/logout" className="ml-2">Logout</Link>
                         ) : (
-                            <Link href="/login" className="ml-2">Login/Register</Link>
+                            <Link href="/login" className="ml-2 leading-relaxed">Login/Register</Link>
                         )}
                     </li>
                 </ul>
