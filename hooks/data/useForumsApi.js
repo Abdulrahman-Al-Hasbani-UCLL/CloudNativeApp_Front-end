@@ -6,8 +6,7 @@ const useForumsApi = () => {
                 'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const registerUser = async (username, email, password) => {
@@ -19,8 +18,7 @@ const useForumsApi = () => {
             },
             body: JSON.stringify({ username, email, password }),
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const loginUser = async (email, password) => {
@@ -32,8 +30,7 @@ const useForumsApi = () => {
             },
             body: JSON.stringify({ login: email, password }),
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const updateUser = async (id, username, email, password) => {
@@ -45,8 +42,7 @@ const useForumsApi = () => {
             },
             body: JSON.stringify({ username, email, password }),
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const fetchUser = async (token) => {
@@ -57,8 +53,7 @@ const useForumsApi = () => {
                 'Authorization': `Bearer ${token}`,
             },
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const deleteUser = async (id) => {
@@ -68,8 +63,7 @@ const useForumsApi = () => {
                 'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const fetchThreads = async (page = 1) => {
@@ -79,8 +73,7 @@ const useForumsApi = () => {
                 'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const createThread = async (title, body, userId) => {
@@ -92,8 +85,7 @@ const useForumsApi = () => {
             },
             body: JSON.stringify({ title, body, userId }),
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const fetchThread = async (id) => {
@@ -103,8 +95,7 @@ const useForumsApi = () => {
                 'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const updateThread = async (id, title, body) => {
@@ -116,8 +107,7 @@ const useForumsApi = () => {
             },
             body: JSON.stringify({ title, body }),
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const deleteThread = async (id) => {
@@ -127,8 +117,7 @@ const useForumsApi = () => {
                 'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const fetchThreadPosts = async (threadId, page = 1) => {
@@ -138,8 +127,7 @@ const useForumsApi = () => {
                 'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const fetchPosts = async (page = 1) => {
@@ -149,8 +137,7 @@ const useForumsApi = () => {
                 'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const createPost = async (body, threadId, userId) => {
@@ -162,8 +149,7 @@ const useForumsApi = () => {
             },
             body: JSON.stringify({ body, threadId, userId }),
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const fetchPost = async (id) => {
@@ -173,8 +159,7 @@ const useForumsApi = () => {
                 'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const updatePost = async (id, body) => {
@@ -186,8 +171,7 @@ const useForumsApi = () => {
             },
             body: JSON.stringify({ body }),
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const deletePost = async (id) => {
@@ -197,8 +181,7 @@ const useForumsApi = () => {
                 'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     const search = async (query, type, page = 1) => {
@@ -208,8 +191,7 @@ const useForumsApi = () => {
                 'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
-        const data = await response.json();
-        return data;
+        return await response.json();
     };
 
     return {
