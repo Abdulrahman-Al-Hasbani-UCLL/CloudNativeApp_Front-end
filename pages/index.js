@@ -39,7 +39,11 @@ const Support = ({ forumUser, threads, posts, currentPage, nextThreadCursor }) =
                                                 <div className="relative w-full mb-2">
                                                     <input
                                                         id="post_thread"
-                                                        className="text-gray-600 focus:outline-none focus:border focus:border-blue-700 bg-gray-100 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border"
+                                                        className="
+                                                            text-gray-600 focus:outline-none focus:border
+                                                            focus:border-blue-700 bg-gray-100 font-normal w-full
+                                                            h-10 flex items-center pl-4 text-sm border-gray-300
+                                                            rounded border"
                                                         placeholder="Type a title"
                                                         onChange={(e) => setTitle(e.target.value)}
                                                     />
@@ -49,7 +53,10 @@ const Support = ({ forumUser, threads, posts, currentPage, nextThreadCursor }) =
                                                 <div className="w-full md:w-1/2" />
                                                 <div className="w-full md:w-1/2 md:flex md:mb-0 mb-4 justify-end">
                                                     <Link
-                                                        className="bg-blue-700 text-sm text-white rounded hover:bg-blue-600 transition duration-150 ease-in-out py-2 px-6 sm:mt-0 mt-4"
+                                                        className="
+                                                            bg-blue-700 text-sm text-white rounded
+                                                            hover:bg-blue-600 transition duration-150 ease-in-out
+                                                            py-2 px-6 sm:mt-0 mt-4"
                                                         href={{
                                                             pathname: forumUser ? '/new-thread' : '/login',
                                                             query: title && { title },

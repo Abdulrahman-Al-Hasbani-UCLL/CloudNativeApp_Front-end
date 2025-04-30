@@ -68,7 +68,9 @@ export default function Search({ onSearchResults }) {
                         </div>
                         <input
                             id="search"
-                            className="text-gray-600 focus:outline-none focus:border focus:border-blue-700 font-normal w-full h-10 flex items-center pl-12 text-sm border-gray-300 rounded border bg-gray-100"
+                            className="
+                                text-gray-600 focus:outline-none focus:border focus:border-blue-700 font-normal
+                                w-full h-10 flex items-center pl-12 text-sm border-gray-300 rounded border bg-gray-100"
                             placeholder="Search"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
@@ -98,7 +100,10 @@ export default function Search({ onSearchResults }) {
                             </div>
                             <select
                                 aria-label="Selected tab"
-                                className="relative z-10 cursor-pointer focus:outline-none focus:border-gray-800 focus:shadow-outline-gray text-sm form-select block w-full py-2 px-2 xl:px-3 border border-gray-300 rounded text-gray-600 appearance-none bg-transparent"
+                                className="
+                                    relative z-10 cursor-pointer focus:outline-none focus:border-gray-800
+                                    focus:shadow-outline-gray text-sm form-select block w-full py-2 px-2 xl:px-3 border
+                                    border-gray-300 rounded text-gray-600 appearance-none bg-transparent"
                                 value={searchType}
                                 onChange={(e) => setSearchType(e.target.value)}
                             >
@@ -113,7 +118,9 @@ export default function Search({ onSearchResults }) {
                     </div>
                     <div className="w-full md:w-1/2 md:flex justify-end">
                         <button
-                            className="bg-gray-800 text-sm text-white rounded hover:bg-gray-600 transition duration-150 ease-in-out py-2 px-6 sm:mt-0 mt-4"
+                            className="
+                                bg-gray-800 text-sm text-white rounded hover:bg-gray-600
+                                transition duration-150 ease-in-out py-2 px-6 sm:mt-0 mt-4"
                             type="submit"
                             disabled={isSubmitting}
                         >

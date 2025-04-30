@@ -116,7 +116,11 @@ const Login = ({ forumUser }) => {
                                         type="text"
                                         name="login"
                                         id="username-email"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        className="
+                                            bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg
+                                            focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5
+                                            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                                            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="username/name@company.com"
                                         required
                                     />
@@ -130,7 +134,11 @@ const Login = ({ forumUser }) => {
                                         name="password"
                                         id="login-password"
                                         placeholder="••••••••"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        className="
+                                            bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg
+                                             focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5
+                                             dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                                             dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         required
                                     />
                                 </div>
@@ -163,7 +171,10 @@ const Login = ({ forumUser }) => {
               type="text"
               name="username"
               id="username"
-              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="
+                bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600
+                focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
+                dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="my_username"
               required
             />
@@ -179,7 +190,10 @@ const Login = ({ forumUser }) => {
               type="email"
               name="email"
               id="email"
-              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="
+                bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600
+                focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
+                dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="name@company.com"
               required
             />
@@ -196,7 +210,10 @@ const Login = ({ forumUser }) => {
               name="password"
               id="password"
               placeholder="••••••••"
-              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="
+                bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600
+                focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
+                dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required
             />
           </div>
@@ -206,7 +223,9 @@ const Login = ({ forumUser }) => {
                 id="terms"
                 aria-describedby="terms"
                 type="checkbox"
-                className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+                className="
+                    w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300
+                    dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
                 required
               />
             </div>

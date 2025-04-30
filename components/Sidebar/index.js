@@ -30,7 +30,10 @@ const Sidebar = ({ data }) => {
                     <line x1={4} y1={18} x2={20} y2={18} />
                 </svg>
                 <ul aria-orientation="vertical" className="rounded py-8">
-                    <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-1 hover:text-blue-700 focus:text-blue-700 focus:outline-none">
+                    <li className="
+                        cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-1 hover:text-blue-700
+                        focus:text-blue-700 focus:outline-none"
+                    >
                         <Link href="/">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +55,10 @@ const Sidebar = ({ data }) => {
                             </svg>
                         </Link>
                     </li>
-                    <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-6 py-1 hover:text-blue-700 focus:text-blue-700 focus:outline-none flex items-center">
+                    <li className="
+                        cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-6 py-1
+                        hover:text-blue-700 focus:text-blue-700 focus:outline-none flex items-center"
+                    >
                         <Link href={data?.id ? `/logout` : `/login`}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +83,13 @@ const Sidebar = ({ data }) => {
                 </ul>
             </div>
             <div
-                className={`absolute top-0 min-h-screen left-0 ml-10 flex items-start flex-col bg-gray-100 transition duration-300 ease-in-out transform ${isMobileNavHidden ? '-left-full opacity-0 pointer-events-none' : 'left-0 opacity-100 pointer-events-auto'}`}
+                className={`
+                    absolute top-0 min-h-screen left-0 ml-10 flex items-start flex-col bg-gray-100 transition 
+                    duration-300 ease-in-out transform 
+                    ${isMobileNavHidden 
+                        ? '-left-full opacity-0 pointer-events-none' 
+                        : 'left-0 opacity-100 pointer-events-auto'}
+                `}
                 id="mobile-nav"
             >
                 <svg
@@ -102,12 +114,18 @@ const Sidebar = ({ data }) => {
                     aria-orientation="vertical"
                     className="rounded py-8 pl-2 pr-32 whitespace-no-wrap"
                 >
-                    <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-blue-700 focus:text-blue-700 focus:outline-none">
+                    <li className="
+                        cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2
+                        hover:text-blue-700 focus:text-blue-700 focus:outline-none"
+                    >
                         <Link href="/" className="ml-2">
                             Home
                         </Link>
                     </li>
-                    <li className="cursor-pointer text-gray-600 text-sm tracking-normal mt-2 py-2 hover:text-blue-700 focus:text-blue-700 focus:outline-none flex items-center">
+                    <li className="
+                        cursor-pointer text-gray-600 text-sm tracking-normal mt-2 py-2
+                        hover:text-blue-700 focus:text-blue-700 focus:outline-none flex items-center"
+                    >
                         {data?.id ? (
                             <Link href="/logout" className="ml-2">Logout</Link>
                         ) : (
