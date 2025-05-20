@@ -1,7 +1,7 @@
-import useForumsApi from '@/hooks/data/useForumsApi';
+import ForumApiService from '@/hooks/data/ForumApiService';
 export default async function handler(req, res) {
     const { query, type } = req.body;
-    const api = useForumsApi();
+    const api = ForumApiService();
     try {
         const searchData = await api.search(query, type.toLowerCase());
         return res.json(searchData);

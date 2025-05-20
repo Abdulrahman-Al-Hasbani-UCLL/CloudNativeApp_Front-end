@@ -1,7 +1,7 @@
-import useForumsApi from '@/hooks/data/useForumsApi';
+import ForumApiService from '@/hooks/data/ForumApiService';
 export default async function handler(req, res) {
     const { username, email, password } = req.body;
-    const api = useForumsApi();
+    const api = ForumApiService();
     try {
         const registerData = await api.registerUser(username, email, password);
         return res.json(registerData);

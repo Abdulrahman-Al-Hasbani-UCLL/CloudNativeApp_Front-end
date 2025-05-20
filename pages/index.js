@@ -5,7 +5,7 @@ import Sidebar from '@/components/Sidebar/index';
 import Search from './search';
 import Threads from './threads';
 import Posts from './posts';
-import useForumsApi from '@/hooks/data/useForumsApi';
+import ForumApiService from '@/hooks/data/ForumApiService';
 
 const Support = ({ forumUser, threads, posts, currentPage, nextThreadCursor }) => {
     const [title, setTitle] = useState('');
@@ -100,7 +100,7 @@ const Support = ({ forumUser, threads, posts, currentPage, nextThreadCursor }) =
 }
 
 export async function getServerSideProps(context) {
-    const api = useForumsApi();
+    const api = ForumApiService();
     const { forumUserToken } = context.req.cookies;
 
     let forumUser = null;

@@ -1,20 +1,21 @@
-const useForumsApi = () => {
+const ForumApiService = () => {
+    const API_URL = process.env.NEXT_PUBLIC_FORU_MS_API_URL;
+    // console.log("Api url: "+API_URL)
+
     const fetchUsers = async (page) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/users?page=${page}`, {
+        const response = await fetch(`${API_URL}/users?page=${page}`, {
             method: 'GET',
             headers: {
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
         return await response.json();
     };
 
     const registerUser = async (username, email, password) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/auth/register`, {
+        const response = await fetch(`${API_URL}/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
             body: JSON.stringify({ username, email, password }),
         });
@@ -22,11 +23,10 @@ const useForumsApi = () => {
     };
 
     const loginUser = async (email, password) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/auth/login`, {
+        const response = await fetch(`${API_URL}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
             body: JSON.stringify({ login: email, password }),
         });
@@ -34,11 +34,10 @@ const useForumsApi = () => {
     };
 
     const updateUser = async (id, username, email, password) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/user/${id}`, {
+        const response = await fetch(`${API_URL}/user/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
             body: JSON.stringify({ username, email, password }),
         });
@@ -46,10 +45,9 @@ const useForumsApi = () => {
     };
 
     const fetchUser = async (token) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/auth/me`, {
+        const response = await fetch(`${API_URL}/auth/me`, {
             method: 'GET',
             headers: {
-                'x-api-key': process.env.FORU_MS_API_KEY,
                 'Authorization': `Bearer ${token}`,
             },
         });
@@ -57,31 +55,28 @@ const useForumsApi = () => {
     };
 
     const deleteUser = async (id) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/user/${id}`, {
+        const response = await fetch(`${API_URL}/user/${id}`, {
             method: 'DELETE',
             headers: {
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
         return await response.json();
     };
 
     const fetchThreads = async (page = 1) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/threads?page=${page}`, {
+        const response = await fetch(`${API_URL}/threads?page=${page}`, {
             method: 'GET',
             headers: {
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
         return await response.json();
     };
 
     const createThread = async (title, body, userId) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/thread`, {
+        const response = await fetch(`${API_URL}/thread`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
             body: JSON.stringify({ title, body, userId }),
         });
@@ -89,21 +84,19 @@ const useForumsApi = () => {
     };
 
     const fetchThread = async (id) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/thread/${id}`, {
+        const response = await fetch(`${API_URL}/thread/${id}`, {
             method: 'GET',
             headers: {
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
         return await response.json();
     };
 
     const updateThread = async (id, title, body) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/thread/${id}`, {
+        const response = await fetch(`${API_URL}/thread/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
             body: JSON.stringify({ title, body }),
         });
@@ -111,41 +104,37 @@ const useForumsApi = () => {
     };
 
     const deleteThread = async (id) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/thread/${id}`, {
+        const response = await fetch(`${API_URL}/thread/${id}`, {
             method: 'DELETE',
             headers: {
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
         return await response.json();
     };
 
     const fetchThreadPosts = async (threadId, page = 1) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/thread/${threadId}/posts?page=${page}`, {
+        const response = await fetch(`${API_URL}/thread/${threadId}/posts?page=${page}`, {
             method: 'GET',
             headers: {
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
         return await response.json();
     };
 
     const fetchPosts = async (page = 1) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/posts?page=${page}`, {
+        const response = await fetch(`${API_URL}/posts?page=${page}`, {
             method: 'GET',
             headers: {
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
         return await response.json();
     };
 
     const createPost = async (body, threadId, userId) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/post`, {
+        const response = await fetch(`${API_URL}/post`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
             body: JSON.stringify({ body, threadId, userId }),
         });
@@ -153,21 +142,19 @@ const useForumsApi = () => {
     };
 
     const fetchPost = async (id) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/post/${id}`, {
+        const response = await fetch(`${API_URL}/post/${id}`, {
             method: 'GET',
             headers: {
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
         return await response.json();
     };
 
     const updatePost = async (id, body) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/post/${id}`, {
+        const response = await fetch(`${API_URL}/post/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
             body: JSON.stringify({ body }),
         });
@@ -175,20 +162,18 @@ const useForumsApi = () => {
     };
 
     const deletePost = async (id) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/post/${id}`, {
+        const response = await fetch(`${API_URL}/post/${id}`, {
             method: 'DELETE',
             headers: {
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
         return await response.json();
     };
 
     const search = async (query, type, page = 1) => {
-        const response = await fetch(`${process.env.FORU_MS_API_URL}/search/${query}?type=${type}&page=${page}`, {
+        const response = await fetch(`${API_URL}/search/${query}?type=${type}&page=${page}`, {
             method: 'POST',
             headers: {
-                'x-api-key': process.env.FORU_MS_API_KEY,
             },
         });
         return await response.json();
@@ -216,4 +201,4 @@ const useForumsApi = () => {
     };
 };
 
-export default useForumsApi;
+export default ForumApiService;

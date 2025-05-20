@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import Meta from '@/components/Meta/index';
 import Sidebar from '@/components/Sidebar/index';
 
-import useForumsApi from '@/hooks/data/useForumsApi';
+import ForumApiService from '@/hooks/data/ForumApiService';
 
 import Threads from '../threads';
 import Posts from '../posts';
@@ -158,7 +158,7 @@ export default function Thread({ forumUser, threadData, threadPosts, recentThrea
 }
 
 export async function getServerSideProps(context) {
-    const api = useForumsApi();
+    const api = ForumApiService();
     const { id } = context.query;
 
     const { forumUserToken } = context.req.cookies;

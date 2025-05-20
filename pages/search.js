@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import useForumsApi from '@/hooks/data/useForumsApi';
+import ForumApiService from '@/hooks/data/ForumApiService';
 
 export default function Search({ onSearchResults }) {
     const [searchQuery, setSearchQuery] = useState('');

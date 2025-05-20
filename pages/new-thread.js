@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import Meta from '@/components/Meta/index';
 import Sidebar from '@/components/Sidebar/index';
-import useForumsApi from '@/hooks/data/useForumsApi';
+import ForumApiService from '@/hooks/data/ForumApiService';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
 
@@ -149,7 +149,7 @@ export default function NewThread({ forumUser }) {
 }
 
 export async function getServerSideProps(context) {
-  const api = useForumsApi();
+  const api = ForumApiService();
   const { forumUserToken } = context.req.cookies;
   let forumUser = null;
 

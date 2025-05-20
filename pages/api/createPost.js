@@ -1,7 +1,7 @@
-import useForumsApi from '@/hooks/data/useForumsApi';
+import ForumApiService from '@/hooks/data/ForumApiService';
 export default async function handler(req, res) {
     const { body, threadId, userId } = req.body;
-    const api = useForumsApi();
+    const api = ForumApiService();
     try {
         const postData = await api.createPost(body, threadId, userId);
         return res.json(postData);
