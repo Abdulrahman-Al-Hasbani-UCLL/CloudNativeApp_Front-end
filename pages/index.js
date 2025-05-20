@@ -2,24 +2,35 @@ import { useState, useEffect } from 'react';
 import Meta from '@/components/Meta/index';
 import Link from 'next/link';
 import Sidebar from '@/components/Sidebar/index';
-import Search from './search';
-import Threads from './threads';
+import Search from '../components/threads/search';
+import Threads from '../components/threads/threads';
 import Posts from './posts';
 import ForumApiService from '@/hooks/data/ForumApiService';
 
-const Support = ({ forumUser, threads, posts, currentPage, nextThreadCursor }) => {
+const Support = ({threads, posts, currentPage, nextThreadCursor }) => {
     const [title, setTitle] = useState('');
     const [threadsData, setThreadsData] = useState(threads || []);
+    const [forumUser, setForumUser] = useState(null);
 
     useEffect(() => {
         setThreadsData(threads);
     }, [threads]);
     
+    useEffect(() => {
+        const token = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
+        if (token) {
+            const api = ForumApiService();
+            api.fetchUser(token).then(user => {
+                setForumUser(user);
+            });
+        }
+    }, []);
+
     return (
         <>
             <Meta title="Forum Y" />
             <div className="flex flex-no-wrap">
-                <Sidebar data={forumUser} />
+                <Sidebar/>
                 <div className="w-full">
                     <div className="w-full px-6">
                         <div className="lg:flex flex-wrap">
@@ -101,15 +112,7 @@ const Support = ({ forumUser, threads, posts, currentPage, nextThreadCursor }) =
 
 export async function getServerSideProps(context) {
     const api = ForumApiService();
-    const { forumUserToken } = context.req.cookies;
-
-    let forumUser = null;
-
-    if (forumUserToken) {
-        forumUser = await api.fetchUser(forumUserToken);
-    }
-    
-    const page = context.query.page || 1; // Default to page 1 if no query param
+    const page = context.query.page || 1;
 
     const fetchThreads = async (page = 1) => {
         const threadsResponse = await api.fetchThreads(page);
@@ -119,7 +122,7 @@ export async function getServerSideProps(context) {
         };
     };
     const { threads, nextThreadCursor } = await fetchThreads(page);
-    
+
     const fetchPosts = async () => {
         const postsResponse = await api.fetchPosts();
         return postsResponse?.posts || [];
@@ -128,11 +131,10 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            forumUser,
             threads,
             posts,
-            currentPage: parseInt(page, 10), // Pass current page to props
-            nextThreadCursor, // Pass nextThreadCursor for pagination control
+            currentPage: parseInt(page, 10),
+            nextThreadCursor,
         }
     };
 }

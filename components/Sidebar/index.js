@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-const Sidebar = ({ data }) => {
+const Sidebar = () => {
     const [isMobileNavHidden, setIsMobileNavHidden] = useState(true);
     const [loggedinUser, setLoggedInUser] = useState(false);
     const router = useRouter();
