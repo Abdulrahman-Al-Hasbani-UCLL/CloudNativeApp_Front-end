@@ -66,7 +66,6 @@ export default function Threads({ data, limit = Infinity }) {
                                     <line x1={8} y1={9} x2={16} y2={9} />
                                     <line x1={8} y1={13} x2={14} y2={13} />
                                 </svg>
-                                <p className="ml-2 text-gray-600 text-xs ">{thread._count?.Post} posts</p>
                             </div>
                         </div>
                     </div>

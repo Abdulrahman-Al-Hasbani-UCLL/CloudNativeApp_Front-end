@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import ForumApiService from '@/hooks/data/ForumApiService';
 
 export default function Search({ onSearchResults }) {
@@ -6,27 +6,17 @@ export default function Search({ onSearchResults }) {
     const [searchType, setSearchType] = useState('Threads');
     const [isSubmitting, setSubmittingState] = useState(false);
 
+    const api = ForumApiService();
+
     const handleSearch = async (e) => {
         e.preventDefault();
         setSubmittingState(true);
-        
+
         try {
-            const response = await fetch('/api/search', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    query: searchQuery,
-                    type: searchType.toLowerCase()
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch search results');
-            }
-
-            const searchData = await response.json();
+            const searchData = await api.search(
+                searchQuery,
+                searchType.toLowerCase()
+            );
             console.log('Search results:', searchData);
             onSearchResults(searchData.threads);
         } catch (error) {
@@ -81,7 +71,7 @@ export default function Search({ onSearchResults }) {
                 <div className="flex flex-col md:flex-row md:items-center">
                     <div className="w-full md:w-1/2">
                         <div className="relative w-full z-10">
-                            <div className="absolute z-0 inset-0 m-auto mr-2 xl:mr-4 z-0 w-5 h-5">
+                            <div className="absolute z-0 inset-0 m-auto mr-2 xl:mr-4 w-5 h-5">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     className="icon cursor-pointer icon-tabler icon-tabler-chevron-down"

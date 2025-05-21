@@ -1,11 +1,12 @@
 const ForumApiService = () => {
     const API_URL = process.env.NEXT_PUBLIC_FORU_MS_API_URL;
-    // console.log("Api url: "+API_URL)
 
     const fetchUsers = async (page) => {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         const response = await fetch(`${API_URL}/users?page=${page}`, {
             method: 'GET',
             headers: {
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
             },
         });
         return await response.json();
@@ -33,13 +34,15 @@ const ForumApiService = () => {
         return await response.json();
     };
 
-    const updateUser = async (id, username, email, password) => {
-        const response = await fetch(`${API_URL}/user/${id}`, {
+    const updateUser = async (id, userData) => {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
+        const response = await fetch(`${API_URL}/users/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
             },
-            body: JSON.stringify({ username, email, password }),
+            body: JSON.stringify(userData),
         });
         return await response.json();
     };
@@ -55,9 +58,11 @@ const ForumApiService = () => {
     };
 
     const deleteUser = async (id) => {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         const response = await fetch(`${API_URL}/user/${id}`, {
             method: 'DELETE',
             headers: {
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
             },
         });
         return await response.json();
@@ -73,10 +78,12 @@ const ForumApiService = () => {
     };
 
     const createThread = async (title, body, userId) => {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         const response = await fetch(`${API_URL}/thread`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
             },
             body: JSON.stringify({ title, body, userId }),
         });
@@ -93,10 +100,12 @@ const ForumApiService = () => {
     };
 
     const updateThread = async (id, title, body) => {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         const response = await fetch(`${API_URL}/thread/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
             },
             body: JSON.stringify({ title, body }),
         });
@@ -104,37 +113,45 @@ const ForumApiService = () => {
     };
 
     const deleteThread = async (id) => {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         const response = await fetch(`${API_URL}/thread/${id}`, {
             method: 'DELETE',
             headers: {
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
             },
         });
         return await response.json();
     };
 
     const fetchThreadPosts = async (threadId, page = 1) => {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         const response = await fetch(`${API_URL}/thread/${threadId}/posts?page=${page}`, {
             method: 'GET',
             headers: {
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
             },
         });
         return await response.json();
     };
 
     const fetchPosts = async (page = 1) => {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         const response = await fetch(`${API_URL}/posts?page=${page}`, {
             method: 'GET',
             headers: {
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
             },
         });
         return await response.json();
     };
 
     const createPost = async (body, threadId, userId) => {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         const response = await fetch(`${API_URL}/post`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
             },
             body: JSON.stringify({ body, threadId, userId }),
         });
@@ -142,19 +159,23 @@ const ForumApiService = () => {
     };
 
     const fetchPost = async (id) => {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         const response = await fetch(`${API_URL}/post/${id}`, {
             method: 'GET',
             headers: {
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
             },
         });
         return await response.json();
     };
 
     const updatePost = async (id, body) => {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         const response = await fetch(`${API_URL}/post/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
             },
             body: JSON.stringify({ body }),
         });
@@ -162,19 +183,49 @@ const ForumApiService = () => {
     };
 
     const deletePost = async (id) => {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         const response = await fetch(`${API_URL}/post/${id}`, {
             method: 'DELETE',
             headers: {
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
+            },
+        });
+        return await response.json();
+    };
+
+    const likePost = async (postId) => {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
+        const response = await fetch(`${API_URL}/posts/${postId}/like`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
+            },
+        });
+        return await response.json();
+    };
+
+    const unlikePost = async (postId) => {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
+        const response = await fetch(`${API_URL}/posts/${postId}/like`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
             },
         });
         return await response.json();
     };
 
     const search = async (query, type, page = 1) => {
-        const response = await fetch(`${API_URL}/search/${query}?type=${type}&page=${page}`, {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
+        const response = await fetch(`${API_URL}/search?page=${page}`, {
             method: 'POST',
             headers: {
+                'Content-Type': 'application/json',
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
             },
+            body: JSON.stringify({ query, type }),
         });
         return await response.json();
     };
@@ -197,6 +248,8 @@ const ForumApiService = () => {
         fetchPost,
         updatePost,
         deletePost,
+        likePost,
+        unlikePost,
         search,
     };
 };
