@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "js-cookie": "^3.0.5",
     "next": "^14.2.28",
     "nextjs-toploader": "^3.6.15",
