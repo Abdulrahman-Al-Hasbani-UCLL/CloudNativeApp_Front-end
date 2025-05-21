@@ -15,9 +15,10 @@ export default function Thread() {
     const router = useRouter();
     const [isSubmitting, setSubmittingState] = useState(false);
     const [formData, setFormData] = useState({ body: '' });
-    const [thread, setThread] = useState( null);
+    const [thread, setThread] = useState(null);
     const [recentThreadsData, setRecentThreads] = useState([]);
     const [recentPostsData, setRecentPosts] = useState([]);
+    const [threadPosts, setThreadPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [forumUser, setForumUser] = useState(null);
 
@@ -36,9 +37,9 @@ export default function Thread() {
         setIsLoading(true);
 
         api.fetchThread(id).then(setThread);
-        // api.fetchThreadPosts(id).then(res => setThreadPosts(res?.posts || []));
+        api.fetchThreadPosts(id).then(res => setThreadPosts(res?.posts || []));
         api.fetchThreads().then(res => setRecentThreads(res?.threads || []));
-        // api.fetchPosts().then(res => setRecentPosts(res?.posts || []));
+        api.fetchPosts().then(res => setRecentPosts(res?.posts || []));
         setIsLoading(false);
     }, [router.isReady, router.query]);
 
@@ -127,27 +128,32 @@ export default function Thread() {
                                         <span className="sr-only">Loading...</span>
                                     </div>
                                 ) : (
-                                    <form method="POST" onSubmit={onSubmit} className="mt-8 flex flex-col">
-                                        <textarea
-                                            name="body"
-                                            onChange={onChange}
-                                            placeholder="Post a reply to the thread"
-                                            className="pl-6 pt-2 bg-gray-100 w-full h-24 resize-none focus:outline-none focus:border-blue-400 border border-transparent text-gray-800"
-                                        />
-                                        <div className="w-full pt-3">
-                                            <button type="submit" disabled={isSubmitting} className="bg-blue-700 text-sm text-white rounded hover:bg-blue-600 transition duration-150 ease-in-out py-2 px-6 sm:mt-0 mt-4 float-right"
-                                            >
-                                                Post
-                                            </button>
+                                    <div>
+                                        <div className="mt-8">
+                                            <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+                                            <div className="my-8 text-gray-900 text-xl">Replies</div>
+                                            <div className="my-8 text-gray-900 text-l">
+                                                {threadPosts.length} {threadPosts.length === 1 ? 'Post' : 'Posts'}
+                                            </div>
+                                            <Posts data={threadPosts} />
                                         </div>
-                                    </form>
+                                        <hr className="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded-sm md:my-10 dark:bg-gray-700"></hr>
+                                        <form method="POST" onSubmit={onSubmit} className="mt-8 flex flex-col">
+                                            <textarea
+                                                name="body"
+                                                onChange={onChange}
+                                                placeholder="Post a reply to the thread"
+                                                className="pl-6 pt-2 bg-gray-100 w-full h-24 resize-none focus:outline-none focus:border-blue-400 border border-transparent text-gray-800"
+                                            />
+                                            <div className="w-full pt-3">
+                                                <button type="submit" disabled={isSubmitting} className="bg-blue-700 text-sm text-white rounded ho</div>ver:bg-blue-600 transition duration-150 ease-in-out py-2 px-6 sm:mt-0 mt-4 float-right"
+                                                >
+                                                    Post
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 )}
-                                {/* {thread?._count.Post > 0 && (
-                                    <>
-                                        <div className="my-8 text-gray-900 text-xl">Posts</div>
-                                        <Posts data={threadPosts} />
-                                    </>
-                                )} */}
                             </div>
                             <div className="py-10 lg:w-1/3 w-full md:pl-6">
                                 <h3 className="mb-5 text-gray-900 font-medium text-xl">Recent threads</h3>

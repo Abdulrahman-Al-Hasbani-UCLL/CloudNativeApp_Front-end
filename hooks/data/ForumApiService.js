@@ -195,11 +195,13 @@ const ForumApiService = () => {
 
     const search = async (query, type, page = 1) => {
         const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
-        const response = await fetch(`${API_URL}/search/${query}?type=${type}&page=${page}`, {
+        const response = await fetch(`${API_URL}/search?page=${page}`, {
             method: 'POST',
             headers: {
+                'Content-Type': 'application/json',
                 ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
             },
+            body: JSON.stringify({ query, type }),
         });
         return await response.json();
     };

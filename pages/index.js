@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Sidebar from '@/components/Sidebar/index';
 import Search from '../components/threads/search';
 import Threads from '../components/threads/threads';
-import Posts from './posts';
 import ForumApiService from '@/hooks/data/ForumApiService';
 
 const Support = ({threads, posts, currentPage, nextThreadCursor }) => {
@@ -36,7 +35,7 @@ const Support = ({threads, posts, currentPage, nextThreadCursor }) => {
                         <div className="lg:flex flex-wrap">
                             <div className="py-10 lg:w-2/3 w-full md:pr-6 md:border-r border-gray-300">
                                 <div>
-                                    <Link href="/"><h1 className="text-3xl text-gray-900 font-bold mb-3">Forum</h1></Link>
+                                    <Link href="/"><h1 className="text-3xl text-gray-900 font-bold mb-3">Forum Y: The home off cloud engineers</h1></Link>
                                     {forumUser && (<p className="text-gray-600 text-sm">Welcome, {forumUser.username}</p>)}
                                     <div className="flex flex-col mt-10 md:flex-row md:items-center">
                                         <Search onSearchResults={setThreadsData} />
@@ -96,11 +95,11 @@ const Support = ({threads, posts, currentPage, nextThreadCursor }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="py-10 lg:w-1/3 w-full md:pl-6">
-                                <h3 className="mb-5 text-gray-900 font-medium text-xl">
-                                    Recent posts
-                                </h3>
-                                <Posts data={posts} limit={7} />
+                            <div className="lg:w-1/3 w-full mt-10 lg:mt-0 px-4">
+                                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Forum Highlights</h2>
+                                <p className="text-gray-700 text-base">
+                                    In this forum you can have disscussions about the latest tech in the world of Cloud computing
+                                </p>
                             </div>
                         </div>
                     </div>

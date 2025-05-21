@@ -22,7 +22,10 @@ export default function Posts({ data, limit = Infinity }) {
                 </div>
             ) : (
                 posts?.slice(0, limit)?.map((post) => (
-                    <div key={post.id} className="flex items-center mb-7">
+                    <div
+                        key={post.id}
+                        className="flex items-center mb-7 border border-gray-300 rounded-lg shadow-lg bg-gray-50 p-4"
+                    >
                         <div className="w-full">
                             <div className="flex items-center justify-between w-full">
                                 <h5 className="text-gray-800 text-sm">{post.user?.username}</h5>
