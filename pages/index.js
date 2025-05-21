@@ -6,7 +6,7 @@ import Search from '../components/threads/search';
 import Threads from '../components/threads/threads';
 import ForumApiService from '@/hooks/data/ForumApiService';
 
-const Support = ({threads, posts, currentPage, nextThreadCursor }) => {
+const Support = ({threads, currentPage, nextThreadCursor }) => {
     const [title, setTitle] = useState('');
     const [threadsData, setThreadsData] = useState(threads || []);
     const [forumUser, setForumUser] = useState(null);
@@ -122,16 +122,9 @@ export async function getServerSideProps(context) {
     };
     const { threads, nextThreadCursor } = await fetchThreads(page);
 
-    const fetchPosts = async () => {
-        const postsResponse = await api.fetchPosts();
-        return postsResponse?.posts || [];
-    };
-    const posts = await fetchPosts();
-
     return {
         props: {
             threads,
-            posts,
             currentPage: parseInt(page, 10),
             nextThreadCursor,
         }

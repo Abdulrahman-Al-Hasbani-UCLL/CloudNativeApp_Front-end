@@ -193,6 +193,30 @@ const ForumApiService = () => {
         return await response.json();
     };
 
+    const likePost = async (postId) => {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
+        const response = await fetch(`${API_URL}/posts/${postId}/like`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
+            },
+        });
+        return await response.json();
+    };
+
+    const unlikePost = async (postId) => {
+        const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
+        const response = await fetch(`${API_URL}/posts/${postId}/like`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
+            },
+        });
+        return await response.json();
+    };
+
     const search = async (query, type, page = 1) => {
         const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         const response = await fetch(`${API_URL}/search?page=${page}`, {
@@ -224,6 +248,8 @@ const ForumApiService = () => {
         fetchPost,
         updatePost,
         deletePost,
+        likePost,
+        unlikePost,
         search,
     };
 };
