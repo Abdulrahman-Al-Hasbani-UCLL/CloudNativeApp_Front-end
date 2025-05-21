@@ -5,8 +5,8 @@ This is a [Foru.ms](https://foru.ms/) Next.js starter bootstrapped with the mini
 First, we need to populate the .env file with the following variables:
 
 ```bash
-FORU_MS_API_KEY="YOUR_API_KEY"
-FORU_MS_API_URL="https://foru.ms/api/v1"
+FORU_MS_API_KEY="YOUR_API_KEY" # Not needed anymore
+NEXT_PUBLIC_FORU_MS_API_URL="https://foru.ms/api/v1" # The backend URL
 ```
 
 To obtain an API key, you need to create an account on [Foru.ms](https://foru.ms/) and create a new instance. You can find the API key in the instance settings.

@@ -2,30 +2,40 @@ import { useState, useEffect } from 'react';
 import Meta from '@/components/Meta/index';
 import Link from 'next/link';
 import Sidebar from '@/components/Sidebar/index';
-import Search from './search';
-import Threads from './threads';
-import Posts from './posts';
-import useForumsApi from '@/hooks/data/useForumsApi';
+import Search from '../components/threads/search';
+import Threads from '../components/threads/threads';
+import ForumApiService from '@/hooks/data/ForumApiService';
 
-const Support = ({ forumUser, threads, posts, currentPage, nextThreadCursor }) => {
+const Support = ({threads, currentPage, nextThreadCursor }) => {
     const [title, setTitle] = useState('');
     const [threadsData, setThreadsData] = useState(threads || []);
+    const [forumUser, setForumUser] = useState(null);
 
     useEffect(() => {
         setThreadsData(threads);
     }, [threads]);
     
+    useEffect(() => {
+        const token = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
+        if (token) {
+            const api = ForumApiService();
+            api.fetchUser(token).then(user => {
+                setForumUser(user);
+            });
+        }
+    }, []);
+
     return (
         <>
             <Meta title="Forum Y" />
             <div className="flex flex-no-wrap">
-                <Sidebar data={forumUser} />
+                <Sidebar/>
                 <div className="w-full">
                     <div className="w-full px-6">
                         <div className="lg:flex flex-wrap">
                             <div className="py-10 lg:w-2/3 w-full md:pr-6 md:border-r border-gray-300">
                                 <div>
-                                    <Link href="/"><h1 className="text-3xl text-gray-900 font-bold mb-3">Forum</h1></Link>
+                                    <Link href="/"><h1 className="text-3xl text-gray-900 font-bold mb-3">Forum Y: The home off cloud engineers</h1></Link>
                                     {forumUser && (<p className="text-gray-600 text-sm">Welcome, {forumUser.username}</p>)}
                                     <div className="flex flex-col mt-10 md:flex-row md:items-center">
                                         <Search onSearchResults={setThreadsData} />
@@ -85,11 +95,11 @@ const Support = ({ forumUser, threads, posts, currentPage, nextThreadCursor }) =
                                     </div>
                                 </div>
                             </div>
-                            <div className="py-10 lg:w-1/3 w-full md:pl-6">
-                                <h3 className="mb-5 text-gray-900 font-medium text-xl">
-                                    Recent posts
-                                </h3>
-                                <Posts data={posts} limit={7} />
+                            <div className="lg:w-1/3 w-full mt-10 lg:mt-0 px-4">
+                                <h2 className="text-2xl font-semibold text-gray-900 mb-4">Forum Highlights</h2>
+                                <p className="text-gray-700 text-base">
+                                    In this forum you can have disscussions about the latest tech in the world of Cloud computing
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -100,16 +110,8 @@ const Support = ({ forumUser, threads, posts, currentPage, nextThreadCursor }) =
 }
 
 export async function getServerSideProps(context) {
-    const api = useForumsApi();
-    const { forumUserToken } = context.req.cookies;
-
-    let forumUser = null;
-
-    if (forumUserToken) {
-        forumUser = await api.fetchUser(forumUserToken);
-    }
-    
-    const page = context.query.page || 1; // Default to page 1 if no query param
+    const api = ForumApiService();
+    const page = context.query.page || 1;
 
     const fetchThreads = async (page = 1) => {
         const threadsResponse = await api.fetchThreads(page);
@@ -119,20 +121,12 @@ export async function getServerSideProps(context) {
         };
     };
     const { threads, nextThreadCursor } = await fetchThreads(page);
-    
-    const fetchPosts = async () => {
-        const postsResponse = await api.fetchPosts();
-        return postsResponse?.posts || [];
-    };
-    const posts = await fetchPosts();
 
     return {
         props: {
-            forumUser,
             threads,
-            posts,
-            currentPage: parseInt(page, 10), // Pass current page to props
-            nextThreadCursor, // Pass nextThreadCursor for pagination control
+            currentPage: parseInt(page, 10),
+            nextThreadCursor,
         }
     };
 }
