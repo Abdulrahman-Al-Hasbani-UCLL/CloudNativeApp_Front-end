@@ -4,9 +4,12 @@ import ForumApiService from '@/hooks/data/ForumApiService';
 import Sidebar from '@/components/Sidebar';
 
 export default function Profile() {
+    const api = ForumApiService();
+
     const [user, setUser] = useState(null);
     const [editMode, setEditMode] = useState(false);
     const [form, setForm] = useState({});
+    
     const gradients = [
         "from-blue-400 via-purple-300 to-pink-400",
         "from-green-300 via-blue-500 to-purple-600",
@@ -24,7 +27,6 @@ export default function Profile() {
     useEffect(() => {
         const token = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         if (token) {
-            const api = ForumApiService();
             api.fetchUser(token).then(setUser);
         }
     }, []);
@@ -53,9 +55,18 @@ export default function Profile() {
         setEditMode(false);
         setForm(user);
     };
-    const handleSave = () => {
+
+    const handleSave = async () => {
         setEditMode(false);
-        // TODO: Call API to save changes
+        const updatedUser = {
+            username: form.username,
+            email: form.email,
+            displayName: form.displayName,
+            bio: form.bio,
+            url: form.url,
+            image: form.image, // This is a base64 string if uploaded TODO: Change to be file upload for blob storage
+        };
+        await api.updateUser(user.id, updatedUser);
         setUser(form);
     };
 

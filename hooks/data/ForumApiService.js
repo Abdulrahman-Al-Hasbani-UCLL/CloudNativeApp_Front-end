@@ -34,15 +34,15 @@ const ForumApiService = () => {
         return await response.json();
     };
 
-    const updateUser = async (id, username, email, password) => {
+    const updateUser = async (id, userData) => {
         const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
-        const response = await fetch(`${API_URL}/user/${id}`, {
+        const response = await fetch(`${API_URL}/users/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
             },
-            body: JSON.stringify({ username, email, password }),
+            body: JSON.stringify(userData),
         });
         return await response.json();
     };

@@ -2,8 +2,6 @@ import ForumApiService from '@/hooks/data/ForumApiService';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 
-// TODO: Fix liking logic, after a post is liked for some reason I can't unlike it by reclicking
-
 export default function Posts({ data, limit = Infinity }) {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
