@@ -73,6 +73,7 @@ export default function Profile() {
         };
         await api.updateUser(user.id, updatedUser);
         setUser(form);
+        localStorage.setItem('forumUser', JSON.stringify(user));
     };
 
     if (!user) return <div className="flex justify-center items-center h-64">Loading...</div>;
