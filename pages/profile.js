@@ -27,7 +27,12 @@ export default function Profile() {
     useEffect(() => {
         const token = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         if (token) {
-            api.fetchUser(token).then(setUser);
+            const cachedUser = localStorage.getItem('forumUser');
+            if (cachedUser) {
+                setUser(JSON.parse(cachedUser));
+            } else {
+                api.fetchUser(token).then(setUser);
+            }
         }
     }, []);
 

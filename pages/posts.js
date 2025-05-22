@@ -13,7 +13,12 @@ export default function Posts({ data, limit = Infinity }) {
 
     useEffect(() => {
         if (token) {
+            const cachedUser = localStorage.getItem('forumUser');
+        if (cachedUser) {
+            setForumUser(JSON.parse(cachedUser));
+        } else {
             api.fetchUser(token).then(user => setForumUser(user));
+        }
         }
     }, []);
 

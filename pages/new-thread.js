@@ -20,10 +20,15 @@ export default function NewThread() {
         const token = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         if (token) {
             const api = ForumApiService();
-            api.fetchUser(token).then(user => {
+            const cachedUser = localStorage.getItem('forumUser');
+            if (cachedUser) {
+                setForumUser(JSON.parse(cachedUser));
+            } else {
+                api.fetchUser(token).then(user => {
                 setForumUser(user);
                 setLoading(false);
             });
+            }
         } else {
             setLoading(false);
         }

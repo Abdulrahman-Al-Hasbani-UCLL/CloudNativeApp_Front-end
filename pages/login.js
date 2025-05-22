@@ -27,7 +27,11 @@ const Login = ({ forumUser }) => {
             const loginData = await api.loginUser(login, password);
             if (loginData.token) {
                 localStorage.setItem("forumUserToken", loginData.token);
-                router.push("/");
+                const userData = await api.fetchUser(loginData.token);
+                if (userData.id) {
+                    localStorage.setItem("forumUser", JSON.stringify(userData));
+                    router.push("/");
+                }
             } else {
                 setError(loginData.error || "Login failed");
             }
@@ -53,7 +57,11 @@ const Login = ({ forumUser }) => {
                 const loginData = await api.loginUser(email, password);
                 if (loginData.token) {
                     localStorage.setItem("forumUserToken", loginData.token);
-                    router.push("/");
+                    const userData = await api.fetchUser(loginData.token);
+                        if (userData.id) {
+                            localStorage.setItem("forumUser", JSON.stringify(userData));
+                            router.push("/");
+                        }
                 }
             } else {
                 setError(registerData.error || "Registration failed");
