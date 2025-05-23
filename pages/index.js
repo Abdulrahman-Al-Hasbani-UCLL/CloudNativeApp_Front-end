@@ -6,7 +6,7 @@ import Search from '../components/threads/search';
 import Threads from '../components/threads/threads';
 import ForumApiService from '@/hooks/data/ForumApiService';
 
-const Support = ({threads, currentPage, nextThreadCursor }) => {
+const Support = ({ threads, currentPage, nextThreadCursor }) => {
     const [title, setTitle] = useState('');
     const [threadsData, setThreadsData] = useState(threads || []);
     const [forumUser, setForumUser] = useState(null);
@@ -14,7 +14,7 @@ const Support = ({threads, currentPage, nextThreadCursor }) => {
     useEffect(() => {
         setThreadsData(threads);
     }, [threads]);
-    
+
     useEffect(() => {
         const token = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         if (token) {
@@ -29,7 +29,7 @@ const Support = ({threads, currentPage, nextThreadCursor }) => {
         <>
             <Meta title="Forum Y" />
             <div className="flex flex-no-wrap">
-                <Sidebar/>
+                <Sidebar />
                 <div className="w-full">
                     <div className="w-full px-6">
                         <div className="lg:flex flex-wrap">
@@ -78,21 +78,39 @@ const Support = ({threads, currentPage, nextThreadCursor }) => {
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="flex justify-between items-center mt-6 space-x-4">
+                                        {currentPage > 1 ? (
+                                            <Link
+                                                href={`/?page=${currentPage - 1}`}
+                                                className="flex items-center text-blue-500 hover:underline"
+                                            >
+                                                {/* Left Arrow SVG */}
+                                                <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                                </svg>
+                                                Previous
+                                            </Link>
+                                        ) : <span />}
+
+                                        <span className="text-gray-600">Page {currentPage}</span>
+
+                                        {true ? (
+                                            <Link
+                                                href={`/?page=${currentPage + 1}`}
+                                                className="flex items-center text-blue-500 hover:underline"
+                                            >
+                                                Next
+                                                {/* Right Arrow SVG */}
+                                                <svg className="w-5 h-5 ml-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </Link>
+                                        ) : <span />}
+                                    </div>
                                     <div className="mt-6">
                                         <Threads data={threadsData} />
                                     </div>
-                                    <div className="flex justify-between mt-6">
-                                        {currentPage > 1 && (
-                                            <Link href={`/?page=${currentPage - 1}`} className="text-blue-500">
-                                                Previous
-                                            </Link>
-                                        )}
-                                        {nextThreadCursor && (
-                                            <Link href={`/?page=${currentPage + 1}`} className="text-blue-500">
-                                                Next
-                                            </Link>
-                                        )}
-                                    </div>
+                                    
                                 </div>
                             </div>
                             <div className="lg:w-1/3 w-full mt-10 lg:mt-0 px-4">

@@ -77,6 +77,16 @@ const ForumApiService = () => {
         return await response.json();
     };
 
+    const fetchRandomThreads = async () => {
+        const response = await fetch(`${API_URL}/threads/random`, {
+            method: 'GET',
+            headers: {
+
+            },
+        });
+        return await response.json();
+    };
+
     const createThread = async (title, body, userId) => {
         const userToken = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
         const response = await fetch(`${API_URL}/thread`, {
@@ -141,6 +151,14 @@ const ForumApiService = () => {
             headers: {
                 ...(userToken && { 'Authorization': `Bearer ${userToken}` }),
             },
+        });
+        return await response.json();
+    };
+
+    const fetchRandomPosts = async () => {
+        const response = await fetch(`${API_URL}/posts/random`, {
+            method: 'GET',
+            headers: {},
         });
         return await response.json();
     };
@@ -240,10 +258,12 @@ const ForumApiService = () => {
         fetchThreads,
         createThread,
         fetchThread,
+        fetchRandomThreads,
         updateThread,
         deleteThread,
         fetchThreadPosts,
         fetchPosts,
+        fetchRandomPosts,
         createPost,
         fetchPost,
         updatePost,
