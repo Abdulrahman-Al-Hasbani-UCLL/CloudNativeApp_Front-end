@@ -3,7 +3,7 @@ name: Deploy Static Next.js Site to Azure Blob Storage
 on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch:
 
 jobs:
