@@ -43,8 +43,8 @@ export default function Thread() {
 
         api.fetchThread(id).then(setThread);
         api.fetchThreadPosts(id).then(res => setThreadPosts(res?.posts || []));
-        api.fetchThreads().then(res => setRecentThreads(res?.threads || []));
-        api.fetchPosts().then(res => setRecentPosts(res?.posts || []));
+        api.fetchRandomThreads().then(res => setRecentThreads(res?.threads || []));
+        api.fetchRandomPosts().then(res => setRecentPosts(res?.posts || []));
         setIsLoading(false);
     }, [router.isReady, router.query]);
 
@@ -161,10 +161,10 @@ export default function Thread() {
                                 )}
                             </div>
                             <div className="py-10 lg:w-1/3 w-full md:pl-6">
-                                <h3 className="mb-5 text-gray-900 font-medium text-xl">Recent threads</h3>
+                                <h3 className="mb-5 text-gray-900 font-medium text-xl">Some interesting threads</h3>
                                 <Threads data={recentThreadsData} limit={5} />
                                 <hr className="border-t border-gray-300 my-8" />
-                                <h3 className="mb-5 text-gray-900 font-medium text-xl">Recent posts</h3>
+                                <h3 className="mb-5 text-gray-900 font-medium text-xl">Some interesting posts</h3>
                                 <Posts data={recentPostsData} limit={5} />
                             </div>
                         </div>
