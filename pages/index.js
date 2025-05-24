@@ -6,14 +6,23 @@ import Search from '../components/threads/search';
 import Threads from '../components/threads/threads';
 import ForumApiService from '@/hooks/data/ForumApiService';
 
-const Support = ({ threads, currentPage, nextThreadCursor }) => {
+const Support = () => {
     const [title, setTitle] = useState('');
-    const [threadsData, setThreadsData] = useState(threads || []);
+    const [threadsData, setThreadsData] = useState([]);
     const [forumUser, setForumUser] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [nextThreadCursor, setNextThreadCursor] = useState(null);
+
+    const api = ForumApiService();
 
     useEffect(() => {
-        setThreadsData(threads);
-    }, [threads]);
+        const fetchThreads = async () => {
+            const threadsResponse = await api.fetchThreads(currentPage);
+            setThreadsData(threadsResponse?.threads || []);
+            setNextThreadCursor(threadsResponse?.nextThreadCursor || null);
+        };
+        fetchThreads();
+    }, [currentPage]);
 
     useEffect(() => {
         const token = typeof window !== "undefined" ? localStorage.getItem("forumUserToken") : null;
@@ -24,11 +33,19 @@ const Support = ({ threads, currentPage, nextThreadCursor }) => {
                 setForumUser(JSON.parse(cachedUser));
             } else {
                 api.fetchUser(token).then(user => {
-                setForumUser(user);
-            });
-            } 
+                    setForumUser(user);
+                });
+            }
         }
     }, []);
+
+    const handlePrevPage = () => {
+        if (currentPage > 1) setCurrentPage(currentPage - 1);
+    };
+
+    const handleNextPage = () => {
+        setCurrentPage(currentPage + 1);
+    };
 
     return (
         <>
@@ -85,37 +102,32 @@ const Support = ({ threads, currentPage, nextThreadCursor }) => {
                                     </div>
                                     <div className="flex justify-between items-center mt-6 space-x-4">
                                         {currentPage > 1 ? (
-                                            <Link
-                                                href={`/?page=${currentPage - 1}`}
+                                            <button
+                                                onClick={handlePrevPage}
                                                 className="flex items-center text-blue-500 hover:underline"
                                             >
-                                                {/* Left Arrow SVG */}
                                                 <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                                                 </svg>
                                                 Previous
-                                            </Link>
+                                            </button>
                                         ) : <span />}
-
                                         <span className="text-gray-600">Page {currentPage}</span>
-
                                         {true ? (
-                                            <Link
-                                                href={`/?page=${currentPage + 1}`}
+                                            <button
+                                                onClick={handleNextPage}
                                                 className="flex items-center text-blue-500 hover:underline"
                                             >
                                                 Next
-                                                {/* Right Arrow SVG */}
                                                 <svg className="w-5 h-5 ml-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                                                 </svg>
-                                            </Link>
+                                            </button>
                                         ) : <span />}
                                     </div>
                                     <div className="mt-6">
                                         <Threads data={threadsData} />
                                     </div>
-                                    
                                 </div>
                             </div>
                             <div className="lg:w-1/3 w-full mt-10 lg:mt-0 px-4">
@@ -130,28 +142,6 @@ const Support = ({ threads, currentPage, nextThreadCursor }) => {
             </div>
         </>
     );
-}
-
-export async function getServerSideProps(context) {
-    const api = ForumApiService();
-    const page = context.query.page || 1;
-
-    const fetchThreads = async (page = 1) => {
-        const threadsResponse = await api.fetchThreads(page);
-        return {
-            threads: threadsResponse?.threads || [],
-            nextThreadCursor: threadsResponse?.nextThreadCursor || null,
-        };
-    };
-    const { threads, nextThreadCursor } = await fetchThreads(page);
-
-    return {
-        props: {
-            threads,
-            currentPage: parseInt(page, 10),
-            nextThreadCursor,
-        }
-    };
 }
 
 export default Support;

@@ -5,14 +5,21 @@ import ForumApiService from "@/hooks/data/ForumApiService";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-const Login = ({ forumUser }) => {
+const Login = () => {
     const [submittingState, setSubmittingState] = useState(false);
     const [error, setError] = useState(null);
+    const [forumUser, setForumUser] = useState(null);
+
     const router = useRouter();
     const api = ForumApiService();
 
-    if (forumUser?.id) {
-        router.push(`/`);
+    try {
+        const loginToken = localStorage.getItem("forumUserToken");
+        if (loginToken) {
+            router.push("/");
+        }
+    } catch (error) {
+        console.log("No loginToken found in login page");
     }
 
     const handleLogin = async (e) => {
@@ -58,10 +65,10 @@ const Login = ({ forumUser }) => {
                 if (loginData.token) {
                     localStorage.setItem("forumUserToken", loginData.token);
                     const userData = await api.fetchUser(loginData.token);
-                        if (userData.id) {
-                            localStorage.setItem("forumUser", JSON.stringify(userData));
-                            router.push("/");
-                        }
+                    if (userData.id) {
+                        localStorage.setItem("forumUser", JSON.stringify(userData));
+                        router.push("/");
+                    }
                 }
             } else {
                 setError(registerData.error || "Registration failed");
@@ -235,24 +242,5 @@ const Login = ({ forumUser }) => {
         </>
     );
 };
-
-export async function getServerSideProps(context) {
-    const api = ForumApiService();
-    const { forumUserToken } = context.req.cookies;
-    let forumUser = null;
-
-    if (forumUserToken) {
-        const userResponse = await api.fetchUser(forumUserToken);
-        if (userResponse?.id) {
-            forumUser = userResponse;
-        }
-    }
-
-    return {
-        props: {
-            forumUser,
-        }
-    };
-}
 
 export default Login;

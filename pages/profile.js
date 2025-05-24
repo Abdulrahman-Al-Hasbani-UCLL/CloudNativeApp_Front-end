@@ -94,19 +94,19 @@ export default function Profile() {
     };
 
     const handleSave = async () => {
-        setEditMode(false);
-        const updatedUser = {
-            username: form.username,
-            email: form.email,
-            displayName: form.displayName,
-            bio: form.bio,
-            url: form.url,
-            image: form.image, // This is a base64 string if uploaded TODO: Change to be file upload for blob storage
-        };
-        await api.updateUser(user.id, updatedUser);
-        setUser(form);
-        localStorage.setItem('forumUser', JSON.stringify(user));
+    setEditMode(false);
+    const updatedUser = {
+        username: form.username,
+        email: form.email,
+        displayName: form.displayName,
+        bio: form.bio,
+        url: form.url,
+        image: form.image, // This is a base64 string if uploaded TODO: Change to be file upload for blob storage
     };
+    await api.updateUser(user.id, updatedUser);
+    setUser(form);
+    localStorage.setItem('forumUser', JSON.stringify(updatedUser));
+};
 
     if (!user) return <div className="flex justify-center items-center h-64">Loading...</div>;
 
