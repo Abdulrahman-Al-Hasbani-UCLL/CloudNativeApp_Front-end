@@ -18,6 +18,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '21.x'
+      
+      - name: Prepare .env file
+        run: |
+          cp .env.template .env
+          sed -i "s|__API_URL__|${{ secrets.NEXT_PUBLIC_FORU_MS_API_URL }}|g" .env    
 
       - name: Run Upload Script
         run: |

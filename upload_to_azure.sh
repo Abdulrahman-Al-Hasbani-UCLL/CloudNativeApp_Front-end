@@ -25,6 +25,7 @@ find "$local_folder" -type f | while read -r file_path; do
             content_type=$(file --mime-type -b "$file_path")
         fi
 
+        echo "Uploading $file_path to $blob_url with content-type $content_type"
         curl -X PUT -T "$file_path" -H "x-ms-blob-type: BlockBlob" -H "Content-Type: $content_type" "$blob_url"
     fi
 done

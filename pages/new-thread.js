@@ -21,8 +21,10 @@ export default function NewThread() {
         if (token) {
             const api = ForumApiService();
             const cachedUser = localStorage.getItem('forumUser');
+
             if (cachedUser) {
                 setForumUser(JSON.parse(cachedUser));
+                setLoading(false);
             } else {
                 api.fetchUser(token).then(user => {
                 setForumUser(user);
@@ -33,12 +35,6 @@ export default function NewThread() {
             setLoading(false);
         }
     }, []);
-
-    useEffect(() => {
-        if (!loading && !forumUser?.id) {
-            router.push(`/login`);
-        }
-    }, [forumUser, loading, router]);
 
     const onChange = (e) => {
         setFormData((prevFormData) => ({
@@ -69,7 +65,7 @@ export default function NewThread() {
                 );
             } else if (data?.id) {
                 toast.success('Thread successfully created!');
-                router.push(`/thread/${data.id}`);
+                router.push({ pathname: '/thread', query: { id: data.id } });
             }
         } catch (error) {
             console.error('Error creating thread:', error);
@@ -136,6 +132,7 @@ export default function NewThread() {
                                         <textarea
                                             onChange={onChange}
                                             name="body"
+                                            autoFocus="true"
                                             id="body"
                                             rows="7"
                                             className="

@@ -15,7 +15,7 @@ export default function Search({ onSearchResults }) {
         try {
             const searchData = await api.search(
                 searchQuery,
-                searchType.toLowerCase()
+                "threads"
             );
             console.log('Search results:', searchData);
             onSearchResults(searchData.threads);
