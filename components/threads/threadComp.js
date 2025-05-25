@@ -142,6 +142,7 @@ export default function ThreadComp({ id }) {
                                             <textarea
                                                 name="body"
                                                 onChange={onChange}
+                                                autoFocus="true"
                                                 placeholder="Post a reply to the thread"
                                                 className="pl-6 pt-2 bg-gray-100 w-full h-24 resize-none focus:outline-none focus:border-blue-400 border border-transparent text-gray-800"
                                             />
